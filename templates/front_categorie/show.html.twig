@@ -46,15 +46,15 @@
                 <p class="card-text">{{ produit.prix|format_currency ('EUR') }}</p>
                 <div class="d-flex flex-wrap justify-content-between w-100">
                     <a href="{{ path('app_front_produit', {slug: produit.slug}) }}" class="btn btn-dark">Voir</a>
-                    {% if app.user is not null %}
+                    {# {% if app.user is not null %}
                         {% set isInFavori = false %}
                         {% for favori in app.user.favoris %}
                             {% if favori.produit == produit %}
                             {% set isInFavori = true %}
                             {% endif %}
-                        {% endfor %}
-                        <button class="btn btn-dark add-favori" data-produit-id="{{ produit.id }}"><i class="{% if isInFavori == true %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i></button>
-                    {% endif %}
+                        {% endfor %} #}
+                        {# <button class="btn btn-dark add-favori" data-produit-id="{{ produit.id }}"><i class="{% if isInFavori == true %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i></button> #}
+                    {# {% endif %} #}
                 </div>
             </div>
         </div>

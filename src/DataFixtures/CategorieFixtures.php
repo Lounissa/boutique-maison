@@ -78,7 +78,7 @@ class CategorieFixtures extends Fixture
         $categorie->setNom("Art de la table");
         $categorie->setSlug("art-de-la-table");
         $categorie->setDescription("Vaisselle irrésistible pour la plus belle table pour tous les jours ou ceux de fêtes");
-        $categorie->setImageName("decoration.webp");
+        $categorie->setImageName("art-de-la-table.webp");
         $categorie->setUpdatedAt(new DateTimeImmutable());
         $categorie->isIsActive(true);
         $manager->persist($categorie);

@@ -12,6 +12,7 @@
         <thead> 
             <tr>
                 <th>Id</th>
+                <th>Image</th>
                 <th>Nom de l'image</th>
                 <th>Mise à jour</th>
                 <th>Ordre</th>
@@ -22,6 +23,11 @@
         {% for image in images %}
             <tr>
                 <td>{{ image.id }}</td>
+                <td>
+                        <a href="{{ asset('images/produit/' ~ image.imageName) }}" data-lightbox="{{ image.imageName }}">
+                            <img src="{{ asset('images/produit/' ~ image.imageName) }}" alt="" class="img-list">
+                        </a>
+                </td>
                 <td>{{ image.imageName }}</td>
                 <td>{{ image.updatedAt ? image.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
                 <td>{{ image.rankOrder }}</td>

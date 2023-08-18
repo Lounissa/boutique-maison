@@ -33,7 +33,7 @@ class ImagaFixtures extends Fixture implements DependentFixtureInterface
 
         $image = new Image();
         $image->setImageName('porte-serviettes.webp');
-        $image->setProduit($this->getReference(ProduitFixtures::RIDEAUX_NOUVEAUTES));
+        $image->setProduit($this->getReference(ProduitFixtures::PORTE_SERVIETTES));
         $image->setRankOrder(1);
         $manager->persist($image);
 
@@ -100,7 +100,7 @@ class ImagaFixtures extends Fixture implements DependentFixtureInterface
         
         $image = new Image();
         $image->setImageName('etagere-murale-mobilier.webp');
-        $image->setProduit($this->getReference(ProduitFixtures::FAUTEUIL));
+        $image->setProduit($this->getReference(ProduitFixtures::ETAGERE_MURALE));
         $image->setRankOrder(1);
         $manager->persist($image);
 
@@ -117,7 +117,7 @@ class ImagaFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($image);
 
         $image = new Image();
-        $image->setImageName('chambre-enfant-mobilier.jpg');
+        $image->setImageName('chambre-enfant-mobilier.webp');
         $image->setProduit($this->getReference(ProduitFixtures::CHAMBRE_POUR_ENFANT));
         $image->setRankOrder(1);
         $manager->persist($image);
@@ -184,7 +184,7 @@ class ImagaFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($image);
 
         $image = new Image();
-        $image->setImageName('jete-en-peluche-deco.webp');
+        $image->setImageName('jete-en-peluche.webp');
         $image->setProduit($this->getReference(ProduitFixtures::JETE_EN_PELUCHE));
         $image->setRankOrder(1);
         $manager->persist($image);
@@ -282,14 +282,14 @@ class ImagaFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($image);
 
         $image = new Image();
-        $image->setImageName('sets-de-table.jpg');
+        $image->setImageName('sets-de-table.webp');
         $image->setProduit($this->getReference(ProduitFixtures::SETS_DE_TABLE));
         $image->setRankOrder(1);
         $manager->persist($image);
 
         $image = new Image();
         $image->setImageName('coussin-en-velours-art.webp');
-        $image->setProduit($this->getReference(ProduitFixtures::SETS_DE_TABLE));
+        $image->setProduit($this->getReference(ProduitFixtures::COUSSIN_EN_VELOURS_ART));
         $image->setRankOrder(1);
         $manager->persist($image);
 
@@ -307,7 +307,7 @@ class ImagaFixtures extends Fixture implements DependentFixtureInterface
 
         $image = new Image();
         $image->setImageName('mugs-bronx.webp');
-        $image->setProduit($this->getReference(ProduitFixtures::SIMILICUIR_REVERSIBLE));
+        $image->setProduit($this->getReference(ProduitFixtures::MUGS_BRONX));
         $image->setRankOrder(1);
         $manager->persist($image);
 
@@ -355,7 +355,7 @@ class ImagaFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($image);
 
         $image = new Image();
-        $image->setImageName('panier-bebejpg');
+        $image->setImageName('panier-bebe.jpg');
         $image->setProduit($this->getReference(ProduitFixtures::PANIER_BEBE));
         $image->setRankOrder(1);
         $manager->persist($image);
@@ -442,7 +442,7 @@ class ImagaFixtures extends Fixture implements DependentFixtureInterface
         //===============images de produits de catégories de inspirations ====//
         $image = new Image();
         $image->setImageName('collection-luxe-inspiration.webp');
-        $image->setProduit($this->getReference(ProduitFixtures::CANAPE));
+        $image->setProduit($this->getReference(ProduitFixtures::COLLECTION_LUXE));
         $image->setRankOrder(1);
         $manager->persist($image);
 
@@ -489,7 +489,7 @@ class ImagaFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($image);
 
         $image = new Image();
-        $image->setImageName('tapis-de-bain.jpg');
+        $image->setImageName('tapis-de-bain.webp');
         $image->setProduit($this->getReference(ProduitFixtures::TAPIS_DE_BAIN_INSPIRATION));
         $image->setRankOrder(1);
         $manager->persist($image);
