@@ -53,11 +53,15 @@ class Produit
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
+
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Favori::class, orphanRemoval: true)]
+    private Collection $favoris;
     //=====================constructeur=======================//
 
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->favoris = new ArrayCollection();
        
     }
     //=================magic function=============================//
@@ -225,6 +229,36 @@ class Produit
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Favori>
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Favori $favori): static
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris->add($favori);
+            $favori->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Favori $favori): static
+    {
+        if ($this->favoris->removeElement($favori)) {
+            // set the owning side to null (unless already changed)
+            if ($favori->getProduit() === $this) {
+                $favori->setProduit(null);
+            }
+        }
 
         return $this;
     }

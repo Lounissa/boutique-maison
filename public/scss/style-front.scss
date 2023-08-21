@@ -17,4 +17,9 @@ body{
     .cursor-pointer{
         cursor: pointer;
     }
+    .avatar{
+        max-width: 30px;
+        max-height: 30px;
+        border-radius: 50%;
+    }
  }
