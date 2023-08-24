@@ -1,0 +1,51 @@
+{% extends 'base-backend.html.twig' %}
+
+{% block title %}Articles{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-between align-items-center">
+    <h1>Articles </h1>
+    <a href="{{ path('app_admin_article_new') }}" class="btn btn-success">Nouveau</a>
+</div>
+    <table class="table table-index table-striped table-responsive">
+        <thead>
+            <tr>
+                {# <th>Id</th> #}
+                <th>Image</th>
+                <th>Nom</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+                <th>Mise à jour</th>
+                <th>Slug</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                {% if article.imageName is not null %}
+                <a href="{{ asset('images/article/' ~ article.imageName)}}" data-lightbox="{{article.imageName}}">
+                 <img src="{{ asset('images/article/' ~ article.imageName)}}" alt="" class="img-list">
+                </a>
+                {% endif %}
+                {# <td>{{ article.id }}</td> #}
+                <td>{{ article.nom }}</td>
+                <td>{{ article.quantite }}</td>
+                <td>{{ article.prix }}</td>
+                <td>{{ article.updatedAt ? article.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{ article.slug }}</td>
+                <td>
+                    {{ include('admin_article/_delete_form.html.twig') }}
+                    <a href="{{ path('app_admin_article_show', {'id': article.id}) }}"class= "btn btn-dark"> <i class= "align-middle" data-feather= "eye"></i></a>
+                    <a href="{{ path('app_admin_article_edit', {'id': article.id}) }}"class= "btn btn-success" ><i class= "align-middle" data-feather= "edit-2"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8"><div class="text-start">Aucune donné trouvée</div></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

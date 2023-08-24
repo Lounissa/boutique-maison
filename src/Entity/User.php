@@ -68,9 +68,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $secretIv = null;
 
+    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Adresse::class)]
+    private Collection $adresses;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Commande $commande = null;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Panier $panier = null;
+
     public function __construct()
     {
         $this->favoris = new ArrayCollection();
+        $this->adresses = new ArrayCollection();
     }
 
     //=======================getters/setters=============//
@@ -327,6 +337,80 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setSecretIv(?string $secretIv): static
     {
         $this->secretIv = $secretIv;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Adresse>
+     */
+    public function getAdresses(): Collection
+    {
+        return $this->adresses;
+    }
+
+    public function addAdress(Adresse $adress): static
+    {
+        if (!$this->adresses->contains($adress)) {
+            $this->adresses->add($adress);
+            $adress->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdress(Adresse $adress): static
+    {
+        if ($this->adresses->removeElement($adress)) {
+            // set the owning side to null (unless already changed)
+            if ($adress->getUsers() === $this) {
+                $adress->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(?Commande $commande): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($commande === null && $this->commande !== null) {
+            $this->commande->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($commande !== null && $commande->getUser() !== $this) {
+            $commande->setUser($this);
+        }
+
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(?Panier $panier): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($panier === null && $this->panier !== null) {
+            $this->panier->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($panier !== null && $panier->getUser() !== $this) {
+            $panier->setUser($this);
+        }
+
+        $this->panier = $panier;
 
         return $this;
     }

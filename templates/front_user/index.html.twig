@@ -84,8 +84,8 @@
                             <div class="align-self-end w-100">
                                 <p class="card-text">{{ produit.prix|format_currency('EUR') }}</p>
                                 <div class="d-flex flex-wrap justify-content-between w-100">
-                                    <a href="{{ path('app_front_produit', {slug: produit.slug}) }}" class="btn btn-dark">Voir</a>
-                                    <button class="btn btn-dark add-favori from-user-profil" data-produit-id="{{ produit.id }}
+                                    <a href="{{ path('app_front_produit', {slug: produit.slug}) }}" class="btn btn-success">Voir</a>
+                                    <button class="btn btn-success add-favori from-user-profil" data-produit-id="{{ produit.id }}
                                   "><i class="fa-solid fa-heart"></i></button>
                                 </div>
                             </div>

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos articles{% endblock %}
+
+{% block body %}
+<h1>Nos articles</h1>
+    <div class="row">
+    {% for article in articles %}
+    {% set article = "" %}
+    {% if article.nom is not null %}
+    {% set articleName = article.nom %}
+ 
+    {% endif %}
+    <div class="col-12 col-md-3 d-flex align-item-stretch">
+      <div class="card d-flex">
+       {% set image = "default.jpg" %}
+       {% if article.imageName is not null %}
+       {% set image = article.imageName %}
+       {% endif %}
+      <img src="{{ asset('images/article/' ~ image)}}" class="card-img-top" alt="{{articleName|trim}}">
+      <div class="card-body d-flex justify-content-center">
+      <div class="align-self-end text-center">
+    <h5 class="card-title">{{ articleName|trim }}</h5>
+     {# <p class=" card-text">{{ categorie.description }}</p> #}
+    <a href="{{ path('app_front_article_show', {'slug': article.slug}) }}" class="btn btn-dark ">Voir</a>
+     </div>
+    </div>
+   </div>
+   </div>
+  {% else %}
+     aucun article dans la base de données.
+{% endfor %} 
+    </div>
+{% endblock %}

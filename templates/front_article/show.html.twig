@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{article.articleName}} {% endblock %}
+
+{% block body %}
+<h1>{{article.articleName}}</h1>
+    <div class="row">
+    <div class="col-12 col-md-3">
+    {% set image = article.imageName %}
+    {% if article.imageName is null %}
+    {% set image = "default.webp "%}
+    {% endif %}
+    <img src="{{ asset('images/article/' ~ image) }}" alt="{{article.articleName}}" class="img-fluid">
+   </div>
+   <div class="col-12 col-md-9">
+     {% if article.quantite is not null %}
+     {{ article.quantite|raw }}
+     {% else %}
+     <p class="text-muted">Aucune quantité n'est disponible pour cet article.</p>
+     {% endif %}
+
+   </div>
+    </div>
+
+<h2>Les produits de {{article.articleName}}</h2>
+
+    <div class="row">
+    {% produit in article.produits %}
+    <div class="col-6 col-md-3">
+    <div,class=" p-3 mx-3 bg-secondary text-center rounded">
+    <p>{{produit.nom}}</p>
+        {% if produit.images|length > 0 %}
+        <img src="{{ asset('images/produit/' ~ produit.images[0].imageName) }}" alt="{{produit.nom}}" class="img-fluid">
+        {% else %}
+        <img src="{{ asset('images/produit/default.webp') }}" alt="{{produit.nom}}" class="img-fluid">
+        {% endif %}
+        <a href="{{ path('app_front_produit', {slug: produit.slug} ) }}" class="btn btn-dark mt-3">Voir</a>
+
+    </div,class=>
+    
+    </div>
+
+    {% endfor %}
+  </div>
+{% endblock %}

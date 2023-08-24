@@ -16,7 +16,7 @@
         </a>
         {{ render(controller('App\\Controller\\FrontCategorieController::renderCategorieDropDown')) }}
       
-       
+        
         <li class="nav-item">
           <a class="nav-link" href="{{ path('app_front_contact')}}">Contacts</a>
         </li>
@@ -47,7 +47,7 @@
             {% endif %}
         </li>
         <li class="nav-item ">
-          <a class="nav-link" href="#">Panier</a>
+          <a class="nav-link" href="{{ path('app_front_panier' )}}">Panier</a>
         </li>
       </ul>
     </div>

@@ -28,7 +28,17 @@
 </div>
  <div class="col-12 col-md-9">
    <div>{{ produit.description|raw }}</div>
+    <div>
+    
+    <ul>
+      {% for article in produit.articles %}
+      <li><a href="{{ path('app_front_article_show', {slug: article.slug}) }}">{{article.articleName}}</a> </li>
+      {% endfor %}
+    </ul>
+    </div>
    <div>Prix: {{ produit.prix|format_currency('EUR') }}</div>
+   <a href="{{ path('app_front_panier_add', {id: produit.id}) }}" class="btn btn-success mt-3"><i class="fa-solid fa-cart-shopping"></i> Ajoutezr</a>
+
 
 </div>
     </div>

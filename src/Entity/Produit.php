@@ -56,12 +56,25 @@ class Produit
 
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Favori::class, orphanRemoval: true)]
     private Collection $favoris;
+
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Article::class, orphanRemoval: true)]
+    private Collection $articles;
+
+    #[ORM\ManyToOne(inversedBy: 'produits')]
+    private ?Commande $commande = null;
+
+    #[ORM\ManyToOne(inversedBy: 'produits')]
+    private ?Panier $panier = null;
+
+   
     //=====================constructeur=======================//
 
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->favoris = new ArrayCollection();
+        $this->articles = new ArrayCollection();
+      
        
     }
     //=================magic function=============================//
@@ -259,6 +272,60 @@ class Produit
                 $favori->setProduit(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): static
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): static
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getProduit() === $this) {
+                $article->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(?Commande $commande): static
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(?Panier $panier): static
+    {
+        $this->panier = $panier;
 
         return $this;
     }

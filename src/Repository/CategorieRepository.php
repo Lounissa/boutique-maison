@@ -24,17 +24,18 @@ class CategorieRepository extends ServiceEntityRepository
    /**
     * @return Categorie[] Returns an array of Categorie objects
     */
-   public function findBySearch($slug, $value): array
+   public function findBySearch($slug, $value): ?categorie
    {
        return $this->createQueryBuilder('c')
+           ->select('c', 'p')
+           ->leftJoin('c.produits', 'p')
            ->andWhere('c.slug = :val')
-           ->join('c.produits', 'p')
            ->andWhere('p.nom Like :val2')
            ->setParameter('val', $slug)
            ->setParameter('val2', '%'. $value . '%')
            ->orderBy('p.nom', 'ASC')
            ->getQuery()
-           ->getResult();
+           ->getOneOrNullResult();
        ;
    }
 
