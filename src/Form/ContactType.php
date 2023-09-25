@@ -19,7 +19,9 @@ class ContactType extends AbstractType
             ->add('email', EmailType::class, ['label'=>'Votre email', "required"=>true])
             ->add('sujet', TextType::class, ['required'=>false])
             ->add('message', TextareaType::class, ['label'=>'Votre message', "required"=>true])
-            ->add('Envoyer', SubmitType::class, ["attr"=>["class"=>"btn btn-dark mt-3"]])
+            ->add('Envoyer', SubmitType::class, ["attr"=>["class"=>"btn btn-success mt-3"]])
+           
+
         ;
     }
 

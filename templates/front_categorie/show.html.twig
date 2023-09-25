@@ -3,27 +3,36 @@
 {% block title %}{{ categorie.nom}}{% endblock %}
 
 {% block body %}
+<br></br>
+<h1 class="fw-bold text-center">{{ categorie.nom }}</h1>
+<br></br>
 
-<h1>{{ categorie.nom }}</h1>
     <div class="row">
         {% if categorie.imageName is not null %}
             {% set image = categorie.imageName %}
         {% else %}
             {% set image = "default.jpg" %}
         {% endif %}
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-2">
             <img src="{{ asset('images/categorie/' ~ image) }}" alt="Illustration de la catégorie {{ categorie.nom }}" class="img-fluid">
+    <br></br>
+       
         </div>
         <div class="col-12 col-md-9">
         {% if categorie.description is not null %}
         {{ categorie.description|raw }}
         {% else %}
+        
         <p>Il n'y a pas encore de description pour cette catégorie.</p>
         {% endif %}
         </div>
     </div>
 <div class="d-flex flex-wrap justify-content-between align-items-center">
-    <h2 class="mt-5">Nos Produits </h2>
+<br></br>
+
+    <h2 class="fw-bold text-center mt-5">Nos Produits </h2>
+<br></br>
+
     <form  method="post" class="d-flex">
         <input type="search" name="search" class="form-control" required>
         <button type="submit" class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -32,7 +41,7 @@
 
 <div class="row">
 {% for produit in categorie.produits %}
-<div class="col-12 col-md-3 col-lg-2 d-flex align-items-stretch">
+<div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-5 d-flex align-items-stretch">
     <div class="card">
         {% if produit.images|length > 0 %}
             {% set image = produit.images[0].imageName %}

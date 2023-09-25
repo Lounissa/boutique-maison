@@ -23,7 +23,7 @@ class ImageType extends AbstractType
             ->add('rankOrder', IntegerType::class, ['required'=>true, 'data'=>1, "attr"=>["min"=>1]])
             
         ;
-        if($options["fromProduit"]){
+        if(!$options["fromProduit"]){
              $builder
             // pour rappel choice_label permet de choisir le champ qui sera affiché dans le select 
             // auquel cas on n'a pas besoin de la méthod __toString() dans l'entité

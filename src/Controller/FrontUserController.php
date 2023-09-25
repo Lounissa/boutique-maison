@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Adresse;
 use App\Entity\Favori;
+use App\EntityEventListener\UserPersistEventListener;
 use App\Form\UserType;
+use App\Repository\AdresseRepository;
 use App\Repository\FavoriRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,7 +18,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class FrontUserController extends AbstractController
-{
+{   
+    #[Route('/adresses/add', methods: ['POST'])]
+      public function addAdresse(Request $request, AdresseRepository $adresseRepository, EntityManagerInterface $entityManager)
+      {
+       $user = $this->getUser();
+       $adresse = $adresseRepository->find($request->get('adresses'));
+       switch($request->request->get('action')){
+        case 'add' :
+            $adresse = new Adresse();
+            $entityManager->persist($adresse);
+            break;
+            case 'remove': 
+                $adresse = $adresseRepository->findOneBy(['user'=>$user, 'adresse'=>$adresse]);
+                $entityManager->remove($adresse);
+
+       }
+       $entityManager->flush();
+       $this->addFlash("success", 'votre adresse à bien été supprimer');
+       return $this->redirectToRoute('app_front_user');
+         
+
+      }
+   
     #[Route('/favoris/add', methods: ['POST'])]
     public function addFavorite(Request $request, ProduitRepository $produitRepository, EntityManagerInterface $entityManager, 
     FavoriRepository $favoriRepository): JsonResponse
@@ -50,7 +75,6 @@ class FrontUserController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManagerInterface, UserPasswordHasherInterface 
       $userPasswordHasherInterface): Response
     {
-
         // on récupère l'utilisateur connecté
         $user = $this->getUser();
         // on crée un formulaire de User avec les datas du user connecté et on le passe à la vue

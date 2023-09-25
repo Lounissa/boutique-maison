@@ -1,0 +1,44 @@
+{% extends 'base-backend.html.twig' %}
+
+{% block title %} Nos Transporteur{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-between align-items-center">
+    <h1>Nos Transporteur</h1>
+    <a href="{{ path('app_admin_transporteur_new') }}" class= "btn btn-success">Nouveau</a>
+
+</div>
+
+
+    <table class="table table-index table-striped table-responsive">
+        <thead>
+            <tr>
+                {# <th>Id</th> #}
+                <th>Nom</th>
+                <th>Contenu</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for transporteur in transporteurs %}
+            <tr>
+                {# <td>{{ transporteur.id }}</td> #}
+                <td>{{ transporteur.nom }}</td>
+                <td>{{ transporteur.contenu }}</td>
+                <td>{{ transporteur.prix }}</td>
+                <td> 
+                    {% include 'admin_transporteur/_delete_form.html.twig' %}
+                    <a href="{{ path('app_admin_transporteur_show', {'id': transporteur.id}) }}" class= "btn btn-dark"> <i class= "align-middle" data-feather= "eye"></i></a>
+                    <a href="{{ path('app_admin_transporteur_edit', {'id': transporteur.id}) }}" class= "btn btn-success" ><i class= "align-middle" data-feather= "edit-2"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucune entée trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

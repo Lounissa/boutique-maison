@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Votre panier{% endblock %}
+{% block title %}Mon panier{% endblock %}
 
 {% block body %}
-
-<div class="bg-light p-3">
-<h1>Votre panier</h1>
- </div>
-
+<br></br>
+ 
+<main class="container">
+<section class="row">
+ <form action="{{ path('app_front_commande')}}">
+ <div class="col-12">
+      <h1 classe="pt-md-2 mt-lg-1 pt-1">Mon panier</h1>
+ 
+    <br></br>
 <table class="table">
  <thead>
     <tr>
@@ -21,12 +25,15 @@
  <tbody>
  
    {% for element in dataPanier %}
+
           <tr>
              <td>{{ element.produit.nom }}</td>
+
              <td class="text-center">{{ element.produit.prix }} £</td>
              <td class="text-center">{{ element.quantite }}</td>
              <td class="text-center">{{ element.quantite * element.produit.prix }} £</td>
              <td class="text-end">
+                 
                  <a href="{{ path('app_front_panier_add', {id: element.produit.id}) }}" class="btn btn-success">
                 <i class="fa-solid fa-cart-shopping"></i>
                  </a>
@@ -54,13 +61,19 @@
     <td class="text-center">{{ total}} £</td>
      <td class="text-end">
       <a href="{{ path('app_front_panier_delete_all') }}" class="btn btn-danger">
-        <i class="fa-solid fa-cart-shopping"></i>
+        <i class="fa-solid fa-cart-shopping"> Vider</i>
       </a>
     </td>
 
   </tr>
  </tfoot>
 </table>
+<br></br>
+ <a href="{{ path('app_front_commande')}}" class="btn btn-success"> Valider mon panier</a>
+</div>
+</form>
+</section>
+</main>
 {# {{ dump()}} #}
 
 {% endblock %} 

@@ -3,19 +3,29 @@
 {% block title %}Mon compte{% endblock %}
 
 {% block body %}
-<h1>Mon compte</h1>
+<br></br>
+<h1 class="fw-bold">Mon compte</h1>
+<br></br>
+
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info-tab-pane" type="button" role="tab" aria-controls="info-tab-pane" aria-selected="true">Mes informations</button>
         </li>
         <li class="nav-item" role="presentation">
+    <button class="nav-link" id="adresses-tab" data-bs-toggle="tab" data-bs-target="#adresses-tab-pane" type="button" role="tab" aria-controls="adresses-tab-pane" aria-selected="false">Mes Adresses</button>
+</li>
+        <li class="nav-item" role="presentation">
             <button class="nav-link" id="favoris-tab" data-bs-toggle="tab" data-bs-target="#favoris-tab-pane" type="button" role="tab" aria-controls="favoris-tab-pane" aria-selected="false">Mes favoris</button>
         </li>
     </ul>
+     
     <div class="tab-content py-3" id="myTabContent">
         <div class="tab-pane fade show active" id="info-tab-pane" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
         {{ form_start(form) }}
-        {{ form_label(form.avatar, 'Votre avatar', { 'label_attr': { 'class' : "w-100" }}) }}
+        
+        <div class="text-end">{{ form_widget(form.modifier) }}</div>
+      
+          {{ form_label(form.avatar, 'Votre avatar', { 'label_attr': { 'class' : "w-100" }}) }}
         {{ form_widget(form.avatar.imageFile) }}
         <div class="d-flex flex-wrap">
             <div class="col-12 col-md-4 pe-1">
@@ -45,30 +55,82 @@
             {{ form_label(form.tel, 'Votre téléphone', { 'label_attr': { 'class': 'w-100'}}) }}
             {{ form_widget(form.tel) }}
             </div>
+        </div>            
+               
+        {% macro renderAdresseForm(form, rue = null )%}
+        <div class="d-flex flex-wrap bg-form p-3 my-2 item-form-container position-relative">
+         <div class="col-12 col-md-9">
+        
+           {{ form_label(form.vars.form.children["rue"])}}
+           {{ form_widget(form.vars.form.children["rue"])}}
+           {{ form_label(form.vars.form.children["ville"])}}
+           {{ form_widget(form.vars.form.children["ville"])}}
+           {{ form_label(form.vars.form.children["codePostal"])}}
+           {{ form_widget(form.vars.form.children["codePostal"])}}
+           {{ form_label(form.vars.form.children["pays"])}}
+           {{ form_widget(form.vars.form.children["pays"])}}
+       </div>
+       </div>
+       {% endmacro %}
+       {# on import la macro #}
+       {% import _self as macros %}
+            
+           <ul class="item list-unstyled"
+           data-index="{{ form.adresses|length > 0 ? form.adresses|last.vars.name + 1 : 0 }}"
+           data-prototype="{{ macros.renderAdresseForm(form.adresses.vars.prototype)|e('html_attr') }}">
+
+                {% for adresse in form.adresses %}
+                    <li>{{macros.renderAdresseForm(adresse)}}</li>
+                {% endfor %}
+            </ul>
+      
+
+        <div>
+        <button type="button" class="add_item_link btn btn-success mb-3 mt-5" data-collection-holder-class="item"> Ajouter une adresse</button>
+       
         </div>
-        {{ form_label(form.adresse1, 'Votre adresse', { 'label_attr': { 'class': 'w-100'}}) }}
-        {{ form_widget(form.adresse1) }}
-        {{ form_label(form.adresse2, 'Complément d\'adresse', { 'label_attr': { 'class': 'w-100'}}) }}
-        {{ form_widget(form.adresse2) }}
-        <div class="d-flex flex-wrap">
-            <div class="col-12 col-md-4 pe-1">
-                {{ form_label(form.codePostal, 'Votre code postal', { 'label_attr': { 'class': 'w-100'}}) }}
-                {{ form_widget(form.codePostal) }}
-            </div>
-            <div class="col-12 col-md-4 px-1">
-                {{ form_label(form.ville, 'Votre ville', { 'label_attr': { 'class': 'w-100'}}) }}
-                {{ form_widget(form.ville) }}
-            </div>
-            <div class="col-12 col-md-4 ps-1">
-                {{ form_label(form.pays, 'Votre pays', { 'label_attr': { 'class': 'w-100'}}) }}
-                {{ form_widget(form.pays) }}
-            </div>
-        </div>
-        {{ form_widget(form.modifier) }}
+        <div class="text-end">
+    <button class="btn btn-success">{{ button_label|default('Sauvegarer') }}</button>
+         
+       </div>
+
+      
         {{ form_end(form) }}
+                     
         </div>
+
+    <br></br>
+        
+<div class="tab-pane fade" id="adresses-tab-pane" role="tabpanel" aria-labelledby="adresses-tab" tabindex="0">
+<ul class="nav nav-tabs">
+<li class="nav-item">
+  {# <a class="nav-link active" aria-current="page" href="{{ path('app_front_user_adresses')}}"></a> #}
+     {% for adresse in app.user.adresses %}
+
+    <div class="col-xs4"> <h1>Adresse de :  {{app.user.prenom}}  {{app.user.nom}}</h1> 
+        <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Adresse par défaut</label>
+      </div>
+    
+    </div>
+    <div  classe="col-12 col md-3">{{adresse.rue}}</div>
+    <div  classe="col-12 col md-3">{{adresse.codePostal}}</div>
+    <div  classe="col-12 col md-3">{{adresse.ville}}</div>
+    <div  classe="col-12 col md-3">{{adresse.pays}}</div>
+{% endfor %}
+</li>
+</ul>
+
+</div>
+
+    </div>
+     
+      <br></br>
+                
         <div class="tab-pane fade" id="favoris-tab-pane" role="tabpanel" aria-labelledby="favoris-tab" tabindex="0">
             <div class="row">
+
                 {% for favori in app.user.favoris %}
                 {% set produit = favori.produit %}
                 <div class="col-12 col-md-3 col-lg-2 d-flex align-items-stretch parent-card">
@@ -96,4 +158,32 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+
+ {# <script src="{{asset('js/add-item-link.js')}}"></script>
+<script src="{{ asset('js/add-item-link-copy.js') }}"></script>
+ #}
+ {# <script>
+    let checkboxDefault = document.querySelectorAll('.option');
+    let checkboxChecked = 0;
+    checkboxDefault.forEach(function(el){
+        if(el.checked){
+            checkboxChecked++
+    }
+    el.addEventListener('change', (e)=>{
+        if(el.checked){
+            checkboxChecked++
+   } else{
+          checkboxChecked--
+    }
+    if(checkboxChecked > 1 ){
+        el.checked = false
+        checkboxChecked = 1;
+    }
+    })
+
+    })
+</script> #}
+ 
 {% endblock %}

@@ -3,10 +3,13 @@
 {% block title %}Boutique Maison{% endblock %}
 
 {% block body %}
-<h1>{{ home.titre }}</h1>
+<br></br>
+<h1 class="text-center">{{ home.titre }}</h1>
+<br></br>
+
 {# On vérifie si on a des carousels #}
 {% if carousels|length > 0 %}
-<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         {# On fait une boucle sur le tableau des carousels pour faire les indicators #}
         {% for carousel in carousels %}
@@ -57,5 +60,101 @@
     {% endif %}
   </div>
 </div>
+ <br></br>
+  
+     <h1 class="text-start fw-bold">Nous nouveautés</h1>
+     <p1 class="text-start">Découvrez les dernières tendances de la letrie aux accessoires</p1>
+      <br></br>
+        <button class="btn btn-success text-light" type="submit"> <a class="dropdown-item" 
+         href="{{'categorie/nouveautes'}}">Découvrir</a></button>
+  <div class="container mt-4">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+         <img src="{{ asset('images/home/bronx.webp')}}" class="img-fluid">
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2">
+         <img src="{{ asset('images/home/coussin-en-velours-art.webp')}}" class="img-fluid">
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2">
+         <img src="{{ asset('images/home/deco-chambre.webp')}}" class="img-fluid">
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2">
+         <img src="{{ asset('images/home/etagere-murale-pour-poeles.webp')}}" class="img-fluid">
+        </div>
+     </div>
+  </div>
+  <div class="container mt-4">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 offset-2 my-2">
+         <img src="{{ asset('images/home/chaise-longue.webp')}}" class="img-fluid">
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2">
+         <img src="{{ asset('images/home/bar-en-bambou.webp')}}" class="img-fluid">
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2">
+         <img src="{{ asset('images/home/table-de-jardin.webp')}}" class="img-fluid">
+        </div>
+     </div>
+  </div>
+
+  <div class="container mt-4">
+  <div class="row">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2">
+       <img src="{{ asset('images/home/tapis-arctic-douillet.webp')}}" class="img-fluid">
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2">
+       <img src="{{ asset('images/home/collection-luxe-inspiration.webp')}}" class="img-fluid">
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2">
+       <img src="{{ asset('images/home/laura-ashley.webp')}}" class="img-fluid">
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-2">
+       <img src="{{ asset('images/home/porte-bouteille-botte.webp')}}" class="img-fluid">
+      </div>
+   </div>
+</div>
+
+
+<div id="moncarousel" class="carousel slide mt-5" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#moncarousel" data-bs-slide-to="0" 
+     class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#moncarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#moncarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  <button type="button" data-bs-target="#moncarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="2000">
+      <img src="{{asset('images/home/decoration1.webp')}}" class="d-block w-100" alt="Décoration">
+    </div>
+    <div class="carousel-item">
+      <img src="{{asset('images/home/decoration2.webp')}}" class="d-block w-100" alt="décoration">
+    </div>
+    <div class="carousel-item">
+      <img src="{{asset('images/home/decoration3.webp')}}" class="d-block w-100" alt="Décoration">
+    </div>
+    <div class="carousel-item">
+    <img src="{{asset('images/home/decoration4.webp')}}" class="d-block w-100" alt="Décoration">
+  </div>
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#moncarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#moncarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+    
+    
+
+
+   
+
+
+
 {% endif %}
 {% endblock %}

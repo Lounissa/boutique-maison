@@ -3,7 +3,9 @@
 {% block title %}{{produit.nom}}{% endblock %}
 
 {% block body %}
-<h1>{{produit.nom}}</h1>
+<br></br>
+<h1 class="fw-bold">{{produit.nom}}</h1>
+<br></br>
     <div class="row">
     <div class="col-12 col-md-3">
     {#on vérifie si le produit a des images#}
@@ -17,7 +19,7 @@
     <div class="row justify-content-between">
       {% for image in produit.images %}
       {% if loop.index0 > 0 %}
-     <div class="img-30 mt-3 cursor-pointer">
+     <div class="img-30 mt-5 cursor-pointer">
      <img src="{{asset('images/produit/' ~ produit.images[loop.index0].imageName) }}" alt="" class="img-fluid">
     </div> 
      {% endif %}
@@ -25,7 +27,10 @@
     </div>
     {% endif %}
    {% endif %}
+  <br></br>
 </div>
+
+
  <div class="col-12 col-md-9">
    <div>{{ produit.description|raw }}</div>
     <div>
@@ -37,7 +42,7 @@
     </ul>
     </div>
    <div>Prix: {{ produit.prix|format_currency('EUR') }}</div>
-   <a href="{{ path('app_front_panier_add', {id: produit.id}) }}" class="btn btn-success mt-3"><i class="fa-solid fa-cart-shopping"></i> Ajoutezr</a>
+   <a href="{{ path('app_front_panier_add', {id: produit.id}) }}" class="btn btn-success mt-3"><i class="fa-solid fa-cart-shopping"></i> Ajoutez</a>
 
 
 </div>

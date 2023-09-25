@@ -3,13 +3,18 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Adresse;
+use App\Form\AvatarType;
+use App\Form\AdresseType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class UserType extends AbstractType
 {
@@ -31,23 +36,19 @@ class UserType extends AbstractType
             ])
             ->add('nom')
             ->add('prenom')
-            ->add('adresse1')
-            ->add('adresse2')
-            ->add('codePostal')
-            ->add('ville')
-            ->add('pays', CountryType::class, [
-                'preferred_choices'=> ['FR'],
-            ])
             ->add('tel')
             ->remove('isVerified')
-            ->add('modifier', SubmitType::class, ["attr"=>["class"=>"btn btn-dark mt-3"]])
-        ;
+            ->add('modifier', SubmitType::class, ["attr"=>["class"=>"btn btn-success mt-3"]])
+            ->add('adresses', CollectionType::class, ['entry_type'=>AdresseType::class, "allow_add"=>true, 
+            "by_reference"=>false, 'allow_delete'=>true, 'label'=>false, 'entry_options'=>['fromUser'=>true]])
+            ;    
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+           
         ]);
     }
 }

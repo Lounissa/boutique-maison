@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Avatar;
+use App\Entity\Favori;
+use App\Entity\Adresse;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -38,21 +41,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $adresse1 = null;
+    
+   
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $adresse2 = null;
+   
+   
 
-    #[ORM\Column(length: 10, nullable: true)]
-    private ?string $codePostal = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $ville = null;
-
-    #[ORM\Column(length: 5, nullable: true)]
-    private ?string $pays = null;
-
+    
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $tel = null;
 
@@ -68,7 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $secretIv = null;
 
-    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Adresse::class)]
+    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Adresse::class, cascade: ['persist', 'remove'])]
     private Collection $adresses;
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
@@ -197,67 +192,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    public function getAdresse1(): ?string
-    {
-        return $this->adresse1;
-    }
-
-    public function setAdresse1(?string $adresse1): static
-    {
-        $this->adresse1 = $adresse1;
-
-        return $this;
-    }
-
-    public function getAdresse2(): ?string
-    {
-        return $this->adresse2;
-    }
-
-    public function setAdresse2(?string $adresse2): static
-    {
-        $this->adresse2 = $adresse2;
-
-        return $this;
-    }
-
-    public function getCodePostal(): ?string
-    {
-        return $this->codePostal;
-    }
-
-    public function setCodePostal(?string $codePostal): static
-    {
-        $this->codePostal = $codePostal;
-
-        return $this;
-    }
-
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(?string $ville): static
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    public function getPays(): ?string
-    {
-        return $this->pays;
-    }
-
-    public function setPays(?string $pays): static
-    {
-        $this->pays = $pays;
-
-        return $this;
-    }
-
+    
     public function getTel(): ?string
     {
         return $this->tel;
@@ -349,22 +284,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->adresses;
     }
 
-    public function addAdress(Adresse $adress): static
+    public function addAdresse(Adresse $adresse): static
     {
-        if (!$this->adresses->contains($adress)) {
-            $this->adresses->add($adress);
-            $adress->setUsers($this);
+        if (!$this->adresses->contains($adresse)) {
+            $this->adresses->add($adresse);
+            $adresse->setUsers($this);
         }
 
         return $this;
     }
 
-    public function removeAdress(Adresse $adress): static
+    public function removeAdresse(Adresse $adresse): static
     {
-        if ($this->adresses->removeElement($adress)) {
+        if ($this->adresses->removeElement($adresse)) {
             // set the owning side to null (unless already changed)
-            if ($adress->getUsers() === $this) {
-                $adress->setUsers(null);
+            if ($adresse->getUsers() === $this) {
+                $adresse->setUsers(null);
             }
         }
 
@@ -411,6 +346,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->panier = $panier;
+
+        return $this;
+    }
+
+    public function isIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    public function addAdress(Adresse $adress): static
+    {
+        if (!$this->adresses->contains($adress)) {
+            $this->adresses->add($adress);
+            $adress->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdress(Adresse $adress): static
+    {
+        if ($this->adresses->removeElement($adress)) {
+            // set the owning side to null (unless already changed)
+            if ($adress->getUsers() === $this) {
+                $adress->setUsers(null);
+            }
+        }
 
         return $this;
     }

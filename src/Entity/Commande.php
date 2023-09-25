@@ -22,6 +22,10 @@ class Commande
     #[ORM\Column]
     private ?int $id = null;
 
+     #[ORM\Column(length: 255, unique: true)]
+    private ?string $reference = null;
+
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $produit = null;
 
@@ -204,6 +208,26 @@ class Commande
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of reference
+     */ 
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Set the value of reference
+     *
+     * @return  self
+     */ 
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
 
         return $this;
     }

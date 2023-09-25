@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}création de la commande{% endblock %}
+
+{% block body %}
+<br></br>
+<main class="container">
+<section class="row">
+ {# <form action="{{ path('app_front_commande')}}"> #}
+ <div class="col-12">
+      <h1 classe="pt-md-2 mt-lg-1 pt-1">Ma commande </h1>
+ 
+    <br></br>
+<table class="table">
+ <thead>
+    <tr>
+     <th>Articles</th>
+     <th class="text-center">Prix</th>
+     <th class="text-center">Quantité</th>
+     <th class="text-end">Total</th>
+
+    
+    </tr>   
+ </thead>
+ <tbody>
+
+    {% for article in articles %}
+
+    {% set total = article.prix * article.quantite %}
+    <tr>
+
+        <td class="text-start">{{article.produit.nom}}</td>
+        <td  class="text-center">{{article.prix}}</td>
+        <td  class="text-center">{{article.quantite}}</td>
+            <td class="text-end">{{total}} £</td>
+
+    </tr>
+    {% endfor %}
+</tbody>
+<tfoot>
+  <tr>
+    <td class="bolder">Total</td>
+    <td colspan="3" class="text-end">{{total}} £</td>
+
+</tr>
+
+</tfoot>
+</table>
+
+
+
+
+ {# <div class="col-12">
+  <h3 class="pt-md-2 mt-lg-1 pt-1">
+  <span class="pt-md-2 mt-lg-1 pt-1">Choisir une adresse de livraison</span> 
+    </h3>
+    {{form_row(form.adresses)|replace({'[-br]' : '<br/>'})|raw}}
+    <h3 class="fs-base fw-normal text-body text-uppercase mt-n4 mt-md-n3 pt-5 pb-2 pb-sm-3"> #}
+  <br></br>
+<span class="pt-md-2 mt-lg-1 pt-1">Mode de livraison</span> 
+</h3>
+{{form_row(form.transporteur)|replace({'[-br]' : '<br/>'})|raw}}
+</div>
+
+{# <div class="col-lg-5 offest-lg-1 pt-1">
+<h3 class="pt-md-2 mt-lg-1 pt-1">Récapitulatif de la commande <span class="fs-base fw-normal text-muted">({{articles|length}} produits)</span></h3>
+</div>
+
+{% set total = null %}
+{% for article in articles %}
+{% set  total = total + (article.prix + article.quantite)%}
+{% endfor %}
+<div class="col-lg-5 offest-lg-1 pt-1">
+Total: <span class="fs-3 fw-semibold text-dark ms-2">{{(total )|number_format(2, ',', '.')}} £</span>
+
+</div> #}
+
+
+
+
+
+
+
+
+</div>
+<br></br>
+<div class="mt-5 text-start">
+<button class="btn btn-success" type="submit">Valider ma commande</button>
+</div>
+ </section>
+</main>
+
+{% endblock %}
+
+
+
+{# {{form_start}} #}
+{# <h1 class="h2 pb-2">Création de la commande</h1>
+<h2 class="fs-base fw-normal text-body text-uppercase pb-1 pb-sm-1">
+ <span class="text-decoration-underline ms-1">Détailes de la commande</span>
+</h2>
+<p> Si vous n'avez pas d'adresse ajouter une dans votre espace compte <a href="#">Ajouter une adresse</a></p>
+<h3 class="fs-base fw-normal text-body text-uppercase pb-2 pb-sm-3">
+<span class="text-decoration-underline ms-1">Choisir une livraison</span> 
+</h3> #}
+
+{# {{form_row(form.adresses)|replace({'[-br]' : '<br/>'})|raw}} #}
+{# <h3 class="fs-base fw-normal text-body text-uppercase mt-n4 mt-md-n3 pt-5 pb-2 pb-sm-3">
+<span class="text-decoration-underline ms-1">Mode de livraison</span> 
+</h3> #}
+{# {{form_row(form.transporteur)|replace({'[-br]' : '<br/>'})|raw}} #}
+
+{# </div>
+<div class="col-lg-5 offest-lg-1 pt-1"> #}
+{# <h3 class="pb-2 pt-md-2 my-4 mt-lg-5">Récapitulatif de la commande <span class="fs-base fw-normal text-muted">({{recapPanier|length}} produits)</span></h3> #}
+ {# form#}
+{# {% set total = null %} #}
+{# {% for produit in recapPanier %} #}
+{# {% set  total = total + (produit.produit.prix + produit.quantite)%} #}
+
+{# {% endfor %} #}
+{# <div class="d-flex align-items-center justify-content-between border-top fs-xl pt-4 mb-4">
+ Total: <span class="fs-3 fw-semibold text-dark ms-2">{{(total /100 )|number_format(2, ',', '.')}} £</span>
+</div> #}
+{# <div class="mt-5 text-center">
+<button class="btn btn-success" type="submit">Valider ma commande</button>
+</div> #}
+
+{# </div>
+</div> #}
+{# {{ form_end }} #}
+{# </div> #}
+   
+
+    

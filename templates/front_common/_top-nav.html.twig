@@ -1,30 +1,46 @@
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{{path('app_home2')}}">Boutique Maison</a>
+
+   <header>   
+   <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container-fluid p-4">
+
+    <a class="navbar-brand mx-5" href="{{path('app_home2')}}">Boutique Maison</a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
      aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav w-100">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{path('app_home2')}}">Accueil</a>
+          <a class="nav-link active mx-5" aria-current="page" href="{{path('app_home2')}}">Accueil</a>
         </li>
+
         <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Catégories
-        </a>
+        <a class="nav-link dropdown-toggle mx-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catégories</a>
         {{ render(controller('App\\Controller\\FrontCategorieController::renderCategorieDropDown')) }}
-      
+      </li>
         
         <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_front_contact')}}">Contacts</a>
+          <a class="nav-link mx-5" href="{{ path('app_front_contact')}}">Contacts</a>
         </li>
+        
+        
+        <div class="d-flex flex-wrap justify-content-between  mx-5 align-items-center">
+
+         <form  method="post" class="d-flex" role="search">
+         <input class="form-control me-2" type="search" placeholder="recherche" aria-label="Search" required>
+         <button class="btn btn-outline-success" type="submit">Recherche</button>
+        
+        </form>
+      </div>
+
         <li class="nav-item ms-lg-auto d-flex align-items-center">
             {% if app.user is null %}
-              <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+              <a class="nav-link mx-4" href="{{ path('app_register') }}">Inscription</a>
             {% else %}
-              <span class="text-light me-2">{{ app.user.email}}</span>
+              {# <span class="text-light me-2">{{ app.user.email}}</span> #}
             {% if app.user.avatar is not null and app.user.avatar.imageName is not null %}
               <img src="{{ asset('images/avatar/' ~ app.user.avatar.imageName) }}" alt="avatar" class="avatar" >
             {% endif %}
@@ -41,15 +57,36 @@
         <li class="nav-item">
 
             {% if is_granted("ROLE_USER")%}
-            <a class="nav-link" href="{{path('app_logout') }}">Déconnetion</a>
+            <a class="nav-link mx-4" href="{{path('app_logout') }}">Déconnexion</a>
             {% else %}
-            <a class="nav-link" href="{{path('app_login') }}">Connexion</a>
+            <a class="nav-link mx-4" href="{{path('app_login') }}">Connexion</a>
             {% endif %}
         </li>
         <li class="nav-item ">
-          <a class="nav-link" href="{{ path('app_front_panier' )}}">Panier</a>
+          <a class="nav-link mx-5" href="{{ path('app_front_panier' )}}"><i class="fa-solid text-light  fa-basket-shopping"></i></a>
         </li>
+        <li class="nav-item ">
+      <a class="nav-link" href="{{ path('app_front_commande' )}}"></a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link" href="{{ path('app_front_user' )}}"></a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link" href="{{ path('app_front_commande_verify' )}}"></a>
+    </li>
+    
+    <li class="nav-item ">
+      <a class="nav-link" href="{{ path('app_front_transporteur' )}}"></a>
+    </li>
       </ul>
     </div>
   </div>
 </nav>
+</header>
+
+
+
+
+
+
+      

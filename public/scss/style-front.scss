@@ -1,4 +1,5 @@
 @import '_variables.scss';
+
 body{
     background: url('../images/cream_dust.webp');
     font-family: 'poppins', sans-serif;
@@ -12,6 +13,7 @@ body{
     }
     .img-30{
         width: 30%;
+      
 
     }
     .cursor-pointer{
@@ -22,4 +24,31 @@ body{
         max-height: 30px;
         border-radius: 50%;
     }
+    
+   
+    .bg-form-adresse{
+        .bt-trash{
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    }
+    main{
+        min-height: 100vh;
+        // position: relative;
+        // padding-bottom: 50px ;
+    }
+    @media screen  and (max-width:968px){
+        .img-30{
+            width: 45%;
+        }
+    }
+    @media screen and(max-width:540px) {
+        .img-30{
+            width: 90%;
+        }
+    }
+ 
  }
+ 
+

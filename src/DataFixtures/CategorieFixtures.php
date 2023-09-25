@@ -90,7 +90,7 @@ class CategorieFixtures extends Fixture
         $categorie = new Categorie();
         $categorie->setNom("Rangement");
         $categorie->setSlug("rangement");
-        $categorie->setDescription("dées pratiques pour ranger : panier, porte-manteau, patère, panier à  linge, portant, meuble d'entrée, meuble à chaussures, accessoires salle de bains, ... ");
+        $categorie->setDescription("Des idées pratiques pour ranger : panier, porte-manteau, patère, panier à  linge, portant, meuble d'entrée, meuble à chaussures, accessoires salle de bains, ... ");
         $categorie->setImageName("rangement.webp");
         $categorie->setUpdatedAt(new DateTimeImmutable());
         $categorie->isIsActive(true);

@@ -3,6 +3,9 @@ const addImageFormDeleteLink = (item) => {
   removeFormButton.classList.add("btn", "text-danger", "bt-trash");
   removeFormButton.innerHTML = '<i class="align-middle" data-feather="trash-2">';
 
+ 
+  
+
   item.append(removeFormButton);
 
   removeFormButton.addEventListener('click', (e) => {
@@ -32,11 +35,20 @@ const addFormToCollection = (e) => {
       );
   // On ajoute un bouton de suppression
   const container = item.querySelector('.img-form-container');
+  
+
   addImageFormDeleteLink(container);
+
+
   // On récupère l'input de type type file dans la li afin d'initialiser son écouteur d'evenement
   const input = item.querySelector('.select-image');
+
   // On active l'écouteur d'évènement sur l'input
+
   activateSelectImage(input);
+
+ 
+
   // On ajoute la li au ul
   collectionHolder.appendChild(item);
   // On active feather pour remplace les balises i par les icones svg
@@ -56,4 +68,6 @@ document
   .forEach((item) => {
       addImageFormDeleteLink(item);
   });
+
+ 
 
